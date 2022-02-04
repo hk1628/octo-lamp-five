@@ -44,47 +44,94 @@ window.addEventListener('DOMContentLoaded', () => {
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
       a: 1,
     },
+    {
+      q: 'What is the standard distance between the target and archer in Olympics?',
+      o: ['50 meters', '70 meters', '100 meters', '120 meters'],
+      a: 1,
+    },
+    {
+      q: 'Which is the largest country by population?',
+      o: ['China', 'Mexico', 'India', 'Russia'],
+      a: 0,
+    },
   ];
 
-  // function to Display the quiz questions and answers from the object
-  const displayQuiz = () => {
-    const quizWrap = document.querySelector('#quizWrap');
-    let quizDisplay = '';
-    quizArray.map((quizItem, index) => {
-      quizDisplay += `<ul class="list-group">
-                   Q - ${quizItem.q}
-                    <li class="list-group-item mt-2" id="li_${index}_0"><input type="radio" name="radio${index}" id="radio_${index}_0"> ${quizItem.o[0]}</li>
-                    <li class="list-group-item" id="li_${index}_1"><input type="radio" name="radio${index}" id="radio_${index}_1"> ${quizItem.o[1]}</li>
-                    <li class="list-group-item"  id="li_${index}_2"><input type="radio" name="radio${index}" id="radio_${index}_2"> ${quizItem.o[2]}</li>
-                    <li class="list-group-item"  id="li_${index}_3"><input type="radio" name="radio${index}" id="radio_${index}_3"> ${quizItem.o[3]}</li>
-                    </ul>
-                    <div>&nbsp;</div>`;
-      quizWrap.innerHTML = quizDisplay;
-    });
-  };
+   // function to Display the quiz questions and answers from the object
+ const displayQuiz = () => {
+  const quizWrap = document.querySelector('#quizWrap');
+  let quizDisplay = '';
+  quizArray.map((quizItem, index) => {
+    quizDisplay += `<ul class="list-group">
+                 Q - ${quizItem.q}
+                  <li class="list-group-item mt-2" id="li_${index}_0"><input type="radio" name="radio${index}" id="radio_${index}_0"> ${quizItem.o[0]}</li>
+                  <li class="list-group-item" id="li_${index}_1"><input type="radio" name="radio${index}" id="radio_${index}_1"> ${quizItem.o[1]}</li>
+                  <li class="list-group-item"  id="li_${index}_2"><input type="radio" name="radio${index}" id="radio_${index}_2"> ${quizItem.o[2]}</li>
+                  <li class="list-group-item"  id="li_${index}_3"><input type="radio" name="radio${index}" id="radio_${index}_3"> ${quizItem.o[3]}</li>
+                  </ul>
+                  <div>&nbsp;</div>`;
+    quizWrap.innerHTML = quizDisplay;
+  });
+};
 
-  // Calculate the score
-  const calculateScore = () => {
-    let score = 0;
-    quizArray.map((quizItem, index) => {
-      for (let i = 0; i < 4; i++) {
-        //highlight the li if it is the correct answer
-        let li = `li_${index}_${i}`;
-        let r = `radio_${index}_${i}`;
-        liElement = document.querySelector('#' + li);
-        radioElement = document.querySelector('#' + r);
+var sec = 60;
+var time = setInterval(myTimer, 1000);
 
-        if (quizItem.a == i) {
-          //change background color of li element here
-        }
+function myTimer() {
+    document.getElementById('timer').innerHTML = sec + " sec left";
+    sec--;
+    if (sec == -1) {
+        clearInterval(time);
+        // alert("Time out!! :(");
+        calculateScore();
+    }
+}
 
-        if (radioElement.checked) {
-          // code for task 1 goes here
-        }
+// Calculate the score
+const calculateScore = () => {
+  let score = 0;
+  quizArray.map((quizItem, index) => {
+    for (let i = 0; i < 4; i++) {
+      //highlight the li if it is the correct answer
+      let li = `li_${index}_${i}`;
+      let r = `radio_${index}_${i}`;
+      const answer = [quizItem.o[1],quizItem.o[3],quizItem.o[1],quizItem.o[1],quizItem.o[0]];
+      liElement = document.querySelector('#' + li);
+      radioElement = document.querySelector('#' + r);
+
+      if (quizItem.a == i) {
+        //change background color of li element here
+        liElement.style.background ='lightgreen';
       }
-    });
-  };
 
-  // call the displayQuiz function
-  displayQuiz();
+      if (radioElement.checked == i) {
+        // code for task 1 goes here
+        score++;
+       
+        
+      }
+      document.getElementById('score').innerHTML = score +"/6";
+    } 
+    
+  });
+ 
+};
+
+
+
+
+const form = document.querySelector('.quiz');
+const result = document.querySelector('.result');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  calculateScore();
+  // printScore();
 });
+
+// call the displayQuiz function
+displayQuiz();
+
+
+
+});
+

@@ -20,31 +20,40 @@
     <div class="container m-5" id="start">
       <div class="card" style="width: 18rem">
         <div class="card-body">
-          <h5 class="card-title">Test your knowledge</h5>
-          <p class="card-text">Some quick description about the quiz .</p>
-          <a class="btn btn-primary">Start</a>
+          <h5 class="card-title">Test Your Knowledge</h5>
+          <p class="card-text">Play for the Quiz! Are You Ready?</p>
+          <a class="btn btn-primary">Start Now</a>
         </div>
       </div>
     </div>
 
-    <!-- (B) QUIZ CONTAINER -->
     <div class="container" id="quizBlock" style="display: none">
       <div class="mb-5">
         <h2>Test your knowledge</h2>
-        - Time remaining <span id="time">01:00</span>
+        - Time remaining <span id="timer"></span>
+        <p class="showresult"><h2>You Scored:</h2><span id="score"></span>
       </div>
+
+      <!-- <div class="result d-none">
+        <p class="showresult">You Scored  <span>0%</span></p>
+      </div> -->
+
+      <form class="quiz">
       <div id="quizWrap"></div>
 
       <div>
-        <button type="button" class="btn btn-primary" id="btnSubmit">
+        <button type="submit" class="btn btn-primary" id="submit" >
           Submit Quiz
         </button>
-        <button type="button" class="btn btn-primary" id="btnReset">
+        <button type="reset" onclick="document.window.reload()" class="btn btn-primary" id="reset">
           Reset Quiz
         </button>
-        <span id="score"></span>
+       
       </div>
+      </form>
+    
     </div>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
